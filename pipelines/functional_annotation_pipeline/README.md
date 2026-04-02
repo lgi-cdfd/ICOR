@@ -10,11 +10,11 @@ Performs comprehensive protein annotation integrating similarity search and doma
 
 ```
 diamond blastp \
--d nr \
+-d nrdb.dmnd \
 -q proteins.fasta \
 -o blast.xml \
--f 5 \
--p 40
+--outmft 5 \
+-threads 40
 ```
 
 ---
@@ -24,8 +24,9 @@ diamond blastp \
 ```
 interproscan.sh \
 -i proteins.fasta \
--o interpro.xml \
+-goterms \
 -f XML \
+-o interpro.xml \
 -cpu 40
 ```
 
