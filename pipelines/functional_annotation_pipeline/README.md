@@ -13,7 +13,7 @@ diamond blastp \
 -d nrdb.dmnd \
 -q proteins.fasta \
 -o blast.xml \
---outmft 5 \
+--outfmt 5 \
 -threads 40
 ```
 
