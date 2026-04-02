@@ -38,9 +38,7 @@ Performed in R using tximport and DESeq2.
 
 * Gene Ontology (GO)
 * KEGG pathway analysis
-
-(Custom scripts provided in `scripts/enrichment/`)
-
+  
 ---
 
 ## Output
