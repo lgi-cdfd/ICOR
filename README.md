@@ -57,38 +57,6 @@ Comprehensive protein annotation:
 
 ---
 
-## System Requirements
-
-* Linux (Ubuntu recommended)
-* Python ≥ 3.8
-* R ≥ 4.0
-* HPC recommended for large datasets
-
----
-
-## Installation
-
-Clone the repository:
-
-```
-git clone https://github.com/lgi-cdfd/ICOR.git
-cd ICOR
-```
-
----
-
-## Reproducibility
-
-All pipelines are modular and can be executed independently. Each pipeline contains its own README and scripts for step-wise execution.
-
----
-
-## Citation
-
-If you use this resource, please cite our publication.
-
----
-
 ## License
 
 MIT License
