@@ -15,7 +15,18 @@ The framework ensures reproducibility, modularity, and standardized reporting ac
 
 ## Pipelines Included
 
-### 1. lncRNA Prediction Pipeline
+### 1. Transcriptome Assembly Pipeline
+
+Performs preprocessing and de novo assembly of RNA-Seq data to generate a high-quality non-redundant unigene dataset for downstream analyses:
+
+* Quality assessment using FastQC
+* Adapter trimming and filtering using Trimmomatic
+* De novo transcriptome assembly using Trinity
+* Redundancy reduction using CD-HIT-EST
+
+This pipeline serves as the foundational step, providing assembled transcripts that are subsequently used for lncRNA prediction, SSR marker identification, functional annotation, and enrichment analyses.
+
+### 2. lncRNA Prediction Pipeline
 
 Integrates multiple tools for high-confidence identification of long non-coding RNAs:
 
@@ -26,7 +37,7 @@ Integrates multiple tools for high-confidence identification of long non-coding 
 
 ---
 
-### 2. SSR Marker Pipeline
+### 3. SSR Marker Pipeline
 
 Pipeline for identification and validation of microsatellite markers:
 
@@ -36,7 +47,7 @@ Pipeline for identification and validation of microsatellite markers:
 
 ---
 
-### 3. Functional Enrichment Pipeline
+### 4. Functional Enrichment Pipeline
 
 Transcript-level quantification and downstream enrichment:
 
@@ -46,7 +57,7 @@ Transcript-level quantification and downstream enrichment:
 
 ---
 
-### 4. Functional Annotation Pipeline
+### 5. Functional Annotation Pipeline
 
 Comprehensive protein annotation:
 
