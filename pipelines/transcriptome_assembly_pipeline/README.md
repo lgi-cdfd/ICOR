@@ -17,11 +17,11 @@ This pipeline performs quality control, preprocessing, de novo transcriptome ass
 Raw sequencing reads were evaluated to assess per-base quality, GC content, adapter contamination, and sequence duplication levels.
 
 ```bash
-mkdir -p ../../data/intermediate/fastqc_reports
+mkdir fastqc_reports
 
 fastqc \
-../../data/raw/*.fastq.gz \
--o ../../data/intermediate/fastqc_reports \
+raw/*.fastq.gz \
+-o fastqc_reports \
 -t 20
 ```
 
@@ -40,14 +40,14 @@ Adapter trimming and quality filtering were performed using the following parame
 Only high-quality paired reads were retained for downstream analysis.
 
 ```bash
-mkdir -p ../../data/intermediate/trimmed_reads
+mkdir -p trimmed_reads
 
 trimmomatic PE -threads 20 \
-../../data/raw/Read_1.fastq.gz ../../data/raw/Read_2.fastq.gz \
-../../data/intermediate/trimmed_reads/paired_1.fastq.gz \
-../../data/intermediate/trimmed_reads/unpaired_1.fastq.gz \
-../../data/intermediate/trimmed_reads/paired_2.fastq.gz \
-../../data/intermediate/trimmed_reads/unpaired_2.fastq.gz \
+raw/Read_1.fastq.gz raw/Read_2.fastq.gz \
+trimmed_reads/paired_1.fastq.gz \
+trimmed_reads/unpaired_1.fastq.gz \
+trimmed_reads/paired_2.fastq.gz \
+trimmed_reads/unpaired_2.fastq.gz \
 ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 \
 LEADING:3 \
 TRAILING:3 \
@@ -60,11 +60,11 @@ MINLEN:32
 ## Step 3: Post-trimming Quality Check (Optional but Recommended)
 
 ```bash
-mkdir -p ../../data/intermediate/fastqc_trimmed
+mkdir -p fastqc_trimmed
 
 fastqc \
-../../data/intermediate/trimmed_reads/*.fastq.gz \
--o ../../data/intermediate/fastqc_trimmed \
+trimmed_reads/*.fastq.gz \
+-o fastqc_trimmed \
 -t 20
 ```
 
@@ -75,17 +75,17 @@ fastqc \
 High-quality paired-end reads were assembled using Trinity to maximize transcript diversity.
 
 ```bash
-mkdir -p ../../data/results/trinity_assembly
+mkdir -p trinity_assembly
 
 Trinity \
 --seqType fq \
---left ../../data/intermediate/trimmed_reads/paired_1.fastq.gz \
---right ../../data/intermediate/trimmed_reads/paired_2.fastq.gz \
+--left trimmed_reads/paired_1.fastq.gz \
+--right trimmed_reads/paired_2.fastq.gz \
 --SS_lib_type RF \
 --min_contig_length 200 \
 --CPU 64 \
 --max_memory 500G \
---output ../../data/results/trinity_assembly
+--output trinity_assembly
 ```
 
 ---
@@ -95,11 +95,11 @@ Trinity \
 To remove redundant transcripts and overlapping isoforms, clustering was performed at 90% sequence identity.
 
 ```bash
-mkdir -p ../../data/results/cdhit
+mkdir -p cdhit_output
 
 cd-hit-est \
--i ../../data/results/trinity_assembly/Trinity.fasta \
--o ../../data/results/cdhit/unigenes.fasta \
+-i trinity_assembly/Trinity.fasta \
+-o cdhit_output/unigenes.fasta \
 -c 0.90 \
 -n 8 \
 -T 40 \
