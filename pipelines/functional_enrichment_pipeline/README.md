@@ -19,11 +19,15 @@ salmon index -t Ref.fasta -i Ref
 ```
 salmon quant \
 -i Ref \
--l A \
+-l ISR \
 -1 Read_1.fastq.gz \
 -2 Read_2.fastq.gz \
 -p 23 \
---validateMappings
+--validateMappings \
+--gcBias \
+--seqBias \
+-o salmon_quant_output
+
 ```
 
 ---
